@@ -10,5 +10,5 @@
 #SBATCH -o outfile
 #SBATCH -e errfile
 export OMP_NUM_THREADS=4
-./a.out
+./a.out 60 12 10
 
