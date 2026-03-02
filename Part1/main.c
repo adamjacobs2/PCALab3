@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define TIMING
 
 /*   ttype: type to use for representing time */
 typedef double ttype;
@@ -44,67 +43,69 @@ int main(int argc, char* argv[]){
     int (*C)[NCB] = malloc(sizeof(int[NRA][NCB]));
     
 
-    begin = now();
-#ifndef TIMING
-    printf("Initializing arrays...\n");
-#endif
+
+    // printf("Initializing arrays...\n");
     for (i=0; i<NRA; i++){
       for (j=0; j<NCA_RB; j++){
           A[i][j]= i+j;
       }
     }
 
-#ifndef TIMING
-    printf (" Contents of matrix A\n");
-    for (i=0; i<NRA; i++) {  
-      for (j=0; j<NCA_RB; j++){
-        printf("%d\t", A[i][j]);
-      }
-      printf("\n");
-      printf("\n");
-    }    
-#endif 
+
+    // printf (" Contents of matrix A\n");
+    // for (i=0; i<NRA; i++) {  
+    //   for (j=0; j<NCA_RB; j++){
+    //     printf("%d\t", A[i][j]);
+    //   }
+    //   printf("\n");
+    //   printf("\n");
+    // }    
+
             
     for (i=0; i<NCA_RB; i++){
       for (j=0; j<NCB; j++){
         B[i][j]= i-j;
       }
     }
-#ifndef TIMING
-    printf (" Contents of matrix B\n");
-    for (i=0; i<NCA_RB; i++) {  
-      for (j=0; j<NCB; j++){
-        printf("%d\t", B[i][j]);
-      }   
-      printf("\n");
-      printf("\n");
-    }     
-#endif
-    #define CHUNKSIZE   10
+
+    // printf (" Contents of matrix B\n");
+    // for (i=0; i<NCA_RB; i++) {  
+    //   for (j=0; j<NCB; j++){
+    //     printf("%d\t", B[i][j]);
+    //   }   
+    //   printf("\n");
+    //   printf("\n");
+    // }     
+
+
+    //start timer after array initialization 
+    begin = now();
     #pragma omp parallel private(i, j, k) shared(A, B, C)
     {
+      int sum;
       #pragma omp for
+      
       for (i=0; i<NRA; i++){
         for (j=0; j<NCB; j++){
-             C[i][j] = 0;
+              C[i][j] = 0;
               for (k=0; k<NCA_RB; k++) {
-                C[i][j] = C[i][j] + A[i][k] * B[k][j];
+                sum += C[i][j] + A[i][k] * B[k][j];
               }
+              C[i][j] = sum;
         }
       }
     }
     end = now();
     time_spent = tdiff(begin, end);
 
-#ifndef TIMING
-    printf ("Output Matrix contents:\n");
-      for (i=0; i<NRA; i++) {  
-        for (j=0; j<NCB; j++)
-          printf("%d\t", C[i][j]);
-          printf("\n");
-          printf("\n");        
-      }   
-#endif
+    // printf ("Output Matrix contents:\n");
+    //   for (i=0; i<NRA; i++) {  
+    //     for (j=0; j<NCB; j++)
+    //       printf("%d\t", C[i][j]);
+    //       printf("\n");
+    //       printf("\n");        
+    //   }   
+
     printf("total time: %.8f sec\n", time_spent);
 
     free(A);
