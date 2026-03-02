@@ -1,9 +1,9 @@
 #include <omp.h>
 #include <stdio.h>
 int main(){
-    #pragma omp parralel
+    #pragma omp parallel
     {
-        int ID = 0;
+        int ID = omp_get_thread_num();
         printf("hello(%d)\n", ID);
         printf("world(%d)\n", ID);
     }
