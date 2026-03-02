@@ -1,6 +1,6 @@
 CC = mpicc
 CFLAGS = -Wall
-TARGETS = main.c
+TARGETS = helloworld.c
 
 
 .PHONY: all clean
@@ -10,4 +10,4 @@ all: $(TARGETS)
 
 
 all: 
-	mpicc -o main main.c
+	gcc -fopenmp helloworld.c
