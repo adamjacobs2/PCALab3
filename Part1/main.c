@@ -52,14 +52,14 @@ int main(int argc, char* argv[]){
     }
 
 
-    // printf (" Contents of matrix A\n");
-    // for (i=0; i<NRA; i++) {  
-    //   for (j=0; j<NCA_RB; j++){
-    //     printf("%d\t", A[i][j]);
-    //   }
-    //   printf("\n");
-    //   printf("\n");
-    // }    
+    printf (" Contents of matrix A\n");
+    for (i=0; i<NRA; i++) {  
+      for (j=0; j<NCA_RB; j++){
+        printf("%d\t", A[i][j]);
+      }
+      printf("\n");
+      printf("\n");
+    }    
 
             
     for (i=0; i<NCA_RB; i++){
@@ -68,14 +68,14 @@ int main(int argc, char* argv[]){
       }
     }
 
-    // printf (" Contents of matrix B\n");
-    // for (i=0; i<NCA_RB; i++) {  
-    //   for (j=0; j<NCB; j++){
-    //     printf("%d\t", B[i][j]);
-    //   }   
-    //   printf("\n");
-    //   printf("\n");
-    // }     
+    printf (" Contents of matrix B\n");
+    for (i=0; i<NCA_RB; i++) {  
+      for (j=0; j<NCB; j++){
+        printf("%d\t", B[i][j]);
+      }   
+      printf("\n");
+      printf("\n");
+    }     
 
 
     //start timer after array initialization 
@@ -98,13 +98,13 @@ int main(int argc, char* argv[]){
     end = now();
     time_spent = tdiff(begin, end);
 
-    // printf ("Output Matrix contents:\n");
-    //   for (i=0; i<NRA; i++) {  
-    //     for (j=0; j<NCB; j++)
-    //       printf("%d\t", C[i][j]);
-    //       printf("\n");
-    //       printf("\n");        
-    //   }   
+    printf ("Output Matrix contents:\n");
+      for (i=0; i<NRA; i++) {  
+        for (j=0; j<NCB; j++)
+          printf("%d\t", C[i][j]);
+          printf("\n");
+          printf("\n");        
+      }   
 
     printf("total time: %.8f sec\n", time_spent);
 
