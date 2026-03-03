@@ -82,14 +82,13 @@ int main(int argc, char* argv[]){
     begin = now();
     #pragma omp parallel private(i, j, k) shared(A, B, C)
     {
-      int sum;
       #pragma omp for
-      
       for (i=0; i<NRA; i++){
         for (j=0; j<NCB; j++){
+              int sum = 0;
               C[i][j] = 0;
               for (k=0; k<NCA_RB; k++) {
-                sum += C[i][j] + A[i][k] * B[k][j];
+                sum += A[i][k] * B[k][j];
               }
               C[i][j] = sum;
         }
