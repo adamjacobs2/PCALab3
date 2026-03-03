@@ -4,20 +4,21 @@ import numpy as np
 # ==========================================
 # PART B: STRONG SCALING DATA (200x200)
 # ==========================================
-# Enter your "total time" results here for 1, 2, 4, 8, 16 threads
+
+
 threads_b = [1, 2, 4, 8, 16]
-times_b = [0.01685549, 0.00826442, 0.00480723, 0.02179815, 0.00899833]  
+times_b = [0.02226862 , 0.01684834, 0.01256594, 0.01954635, 0.02149954]  
 
 # ==========================================
 # PART C: WEAK SCALING DATA
 # ==========================================
-# 1. Baseline: 1 thread for each matrix size
+
 # Order: 100x100, 200x200, 400x400, 800x800, 1600x1600
-baseline_1_thread = [0.00221024, 0.01691866, 0.22015491, 1.19720043, 8.98249211] # REPLACE WITH YOUR DATA
+baseline_1_thread = [0.00309336, 0.02013800, 0.16376167, 1.41104031, 13.56628901] 
 
 # 2. Parallel: Threads/Size variation
 # Order: 2/200, 4/400, 8/800, 16/1600
-parallel_multi_thread = [0.00876162, 0.10838224, 0.23047732, 1.26450440]    
+parallel_multi_thread = [0.01157178, 0.02782149, 0.33469499, 0.70956491]    
 
 # ------------------------------------------
 # Plotting Part B: Strong Scaling
@@ -27,7 +28,7 @@ t1_b = times_b[0]
 labels_b = ["1"] + [f"{t}\n({t1_b/times_b[i]:.2f}x)" for i, t in enumerate(threads_b) if i > 0]
 
 plt.bar(labels_b, times_b, color='skyblue', edgecolor='navy')
-plt.xlabel("Number of Threads (Speedup in Parens)")
+plt.xlabel("Number of Threads (Speedup)")
 plt.ylabel("Total Time (sec)")
 plt.title("Strong Scaling: Constant Matrix Size (200x200)")
 plt.grid(axis='y', linestyle='--', alpha=0.7)
