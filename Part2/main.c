@@ -84,9 +84,15 @@ int main (int argc, char *argv[]){
         printf ("\n");
 
         printf("Initializing arrays...\n");
-        for (i=0; i<NRA; i++)
-          for (j=0; j<NCA_RB; j++)
-              A[i][j]= i+j;  
+        #pragma omp parallel private(i, j)
+        {
+          #pragma omp for
+          for (i=0; i<NRA; i++){
+            for (j=0; j<NCA_RB; j++){
+                A[i][j]= i+j;
+            }
+          }
+        }
 
         printf (" Contents of matrix A\n");
         for (i=0; i<NRA; i++) {  
@@ -95,10 +101,17 @@ int main (int argc, char *argv[]){
           printf("\n");
         }     
               
-        for (i=0; i<NCA_RB; i++)   
-          for (j=0; j<NCB; j++)
+        
+        #pragma omp parallel private(i, j)
+        {
+          #pragma omp for
+          for (i=0; i<NCA_RB; i++){
+            for (j=0; j<NCB; j++){
               B[i][j]= i-j;
-
+            }
+          }
+          
+        }
         printf (" Contents of matrix B\n");
         for (i=0; i<NCA_RB; i++) {  
           for (j=0; j<NCB; j++)
