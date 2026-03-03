@@ -10,4 +10,4 @@ all: $(TARGETS)
 
 
 all: 
-	mpicc -fopenmp main.c -o a.out
+	mpicc -qopenmp main.c -o a.out

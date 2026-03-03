@@ -10,4 +10,4 @@
 #SBATCH -o outfile
 #SBATCH -e errfile
 export OMP_NUM_THREADS=2
-srun --mpi=$HPC_PMIX ./a.out
+srun --mpi=$HPC_PMIX ./a.out 60 12 10
