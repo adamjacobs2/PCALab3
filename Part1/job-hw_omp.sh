@@ -9,6 +9,6 @@
 #SBATCH -t 00:05:00
 #SBATCH -o Part1_Fig2_16_1600
 #SBATCH -e errfile
-export OMP_NUM_THREADS=8
+export OMP_NUM_THREADS=16
 ./a.out 1600 1600 1600
 
